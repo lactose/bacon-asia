@@ -8,6 +8,7 @@ gem 'unicorn', '~> 4.7.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'haml-rails', '~> 0.4'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
