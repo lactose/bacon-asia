@@ -1,6 +1,10 @@
 class QuestionsController < Controller
   before_filter :find_question
 
+  def index
+    @questions = Question.trending
+  end
+
   def new; end
 
   def create
@@ -10,16 +14,22 @@ class QuestionsController < Controller
     redirect_to questions_url
   end
 
-  def index
-    @questions = Question.trending
+  def show; end
+
+  def add_answer
+    @answer = @question.answers.build(answer_params)
+
+    if @answer.save
+      redirect_to question_url(@question)
+    else
+      render :show
+    end
   end
 
   def upvote
     @question.upvote!
     redirect_to questions_url
   end
-
-  def show; end
 
   private
 
@@ -35,5 +45,9 @@ class QuestionsController < Controller
 
   def question_params
     params.require(:question).permit(:body)
+  end
+
+  def answer_params
+    params.require(:answer).permit(:body)
   end
 end

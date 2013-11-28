@@ -1,4 +1,5 @@
-.question= question.body
+.question
+  = link_to question.body, question_url(question)
 .vote
   = form_tag question_upvote_url(question), method: 'put', class: 'question-form' do
     = button_tag 'vote', value: 'vote'

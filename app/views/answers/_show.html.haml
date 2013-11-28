@@ -1,0 +1,4 @@
+.answer= answer.body
+.vote
+  = form_tag answer_upvote_url(answer), method: 'put', class: 'answer-form' do
+    = button_tag 'vote', value: 'vote'

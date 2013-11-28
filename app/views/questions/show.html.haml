@@ -1,2 +1,11 @@
 .ba-question.ba-view
+  = render 'question', question: @question
+  = form_tag question_answer_url(@question), method: 'post', class: 'question-form' do
+    = render 'answers/new'
+  .ba-answers
+    - if @question.answers.any?
+      - @question.answers.trending.each do |answer|
+        = render 'answers/show', answer: answer
+    - else
+      %span There are no answers yet.
 

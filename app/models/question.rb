@@ -10,6 +10,4 @@ class Question
 
   validates :body, presence: true,
                    length: { maximum: 140 }
-
-  scope :trending, order_by([:votes, :desc])
 end
