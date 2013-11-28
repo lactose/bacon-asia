@@ -1,0 +1,7 @@
+.ba-question.ba-view
+  = form_tag questions_url, method: 'post', class: 'question-form' do
+    .ba-property
+      = label_tag :body, nil, class: 'name' do
+        %p.label
+      = text_field_tag 'question[body]', @question.body, placeholder: 'Ask anything...'
+  = link_to 'Browse', questions_url

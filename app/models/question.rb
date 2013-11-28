@@ -1,6 +1,7 @@
 class Question
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Voteable
 
   field :body, type: String
 
@@ -10,5 +11,5 @@ class Question
   validates :body, presence: true,
                    length: { maximum: 140 }
 
-  scope :trending, order_by([:created_at, :desc])
+  scope :trending, order_by([:votes, :desc])
 end
