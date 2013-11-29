@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'rails',                 '4.0.1'
 gem 'mongoid',               git: 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
+gem 'omniauth'
+gem 'omniauth-facebook',     '1.5.1'
 gem 'unicorn',               '4.7.0'
 
 

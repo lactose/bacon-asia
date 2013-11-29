@@ -6,6 +6,14 @@
     = stylesheet_link_tag    "application"
     = csrf_meta_tags
   %body
+    .ba-page-header{ role: 'banner' }
+      .row-1
+        %ul.nav
+          - if current_user
+            %li= link_to "Sign out", signout_path, id: "sign_out"
+          - else
+            %li= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in"
+
     = yield
     = javascript_include_tag "bottom"
     = yield :javascript
