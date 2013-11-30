@@ -11,6 +11,11 @@ class QuestionsController < Controller
 
   def create
     @question = Question.create(question_params)
+    session[:question_ids] ||= []
+
+    unless current_user
+      session[:question_ids] << @question.id.to_s
+    end
 
     flash[:notice] = "Question asked."
     redirect_to questions_url
@@ -49,7 +54,9 @@ class QuestionsController < Controller
   end
 
   def question_params
-    params.require(:question).permit(:body)
+    params.require(:question)
+          .permit(:body)
+          .merge(user: current_user)
   end
 
   def answer_params

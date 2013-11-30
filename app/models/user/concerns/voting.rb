@@ -12,10 +12,8 @@ class User
 
         if vote = fetch_vote(voteable)
           vote.destroy
-          voteable.inc(vote_count: -1)
         else
           votes.create!(voteable: voteable)
-          voteable.inc(vote_count: 1)
         end
 
         self

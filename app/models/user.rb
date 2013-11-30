@@ -20,4 +20,11 @@ class User
     regex = /^#{Regexp.quote(email.to_s)}$/i
     where(email: regex).first
   end
+
+  def associate_questions(ids)
+    Question.any_in(id: ids).each do |question|
+      question.user = self
+      question.save!
+    end
+  end
 end
