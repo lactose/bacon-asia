@@ -1,8 +1,10 @@
 class QuestionsController < Controller
+  include VotingController
+
   before_filter :find_question
 
   def index
-    @questions = Question.trending
+    @questions = Question.popular
   end
 
   def new; end
@@ -27,8 +29,11 @@ class QuestionsController < Controller
   end
 
   def upvote
-    @question.upvote!
-    redirect_to questions_url
+    if vote(@question)
+      redirect_to question_url(@question)
+    else
+      redirect_to root_url
+    end
   end
 
   private

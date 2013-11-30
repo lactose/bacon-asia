@@ -2,6 +2,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Concerns::OmniAuth
+  include Concerns::Voting
 
   field :email,            type: String
   field :first_name,       type: String

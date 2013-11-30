@@ -1,9 +1,14 @@
 class AnswersController < Controller
+  include VotingController
+
   before_filter :find_answer
 
   def upvote
-    @answer.upvote!
-    redirect_to question_url(@answer.question)
+    if vote(@answer)
+      redirect_to question_url(@answer.question)
+    else
+      redirect_to questions_url
+    end
   end
 
   private

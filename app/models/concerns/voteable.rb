@@ -3,20 +3,21 @@ module Voteable
   include Mongoid::Persistable
 
   included do
-    field :votes, type: Integer, default: 0
-    scope :trending, order_by([:votes, :desc])
+    field :vote_count,        type: Integer, default: 0
+    has_many :votes,
+             class_name: 'User::Vote',
+             as: :voteable
+
+    scope :recent, ->(limit = 50) { where(:created_at.gte => Date.today).limit(limit) }
+    scope :trending, ->(limit = 50) { where(:vote_count.gte => 5).limit(limit) }
+    scope :popular, order_by([:vote_count, :desc])
   end
 
-
-  def upvote!
-    inc(votes: 1)
-    save!
-    self
+  def voteable?
+    true
   end
 
-  def downvote!
-    inc(votes: -1)
-    save!
-    self
+  def votes
+    self.up_votes - self.down_votes
   end
 end
