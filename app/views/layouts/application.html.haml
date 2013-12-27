@@ -10,6 +10,7 @@
       .row-1
         %ul.nav
           - if current_user
+            %li= link_to "My Account", users_account_path
             %li= link_to "Sign out", signout_path, id: "sign_out"
           - else
             %li= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in"

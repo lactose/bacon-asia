@@ -11,6 +11,9 @@ class User
   field :admin,            type: Boolean, default: false
   field :super_admin,      type: Boolean, default: false
 
+  has_many :questions
+  has_many :answers
+
   index({ email: 1 }, { unique: true })
   validates :email, presence:   true,
                     uniqueness: { case_sensitive: false },
@@ -19,12 +22,5 @@ class User
   def self.find_by_email(email)
     regex = /^#{Regexp.quote(email.to_s)}$/i
     where(email: regex).first
-  end
-
-  def associate_questions(ids)
-    Question.any_in(id: ids).each do |question|
-      question.user = self
-      question.save!
-    end
   end
 end

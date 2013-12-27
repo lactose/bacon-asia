@@ -2,12 +2,19 @@ class SessionsController < Controller
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
-    user.associate_questions(session[:question_ids]) if session[:question_ids].present?
+    claim_questions(user)
     redirect_to root_url
   end
 
   def destroy
     session[:user_id] = nil
     redirect_to root_url
+  end
+
+  private
+
+  def claim_questions(user)
+    Question.any_in(id: session[:question_ids])
+            .update_all(user_id: user.id)
   end
 end

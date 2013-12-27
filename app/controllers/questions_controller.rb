@@ -13,12 +13,14 @@ class QuestionsController < Controller
     @question = Question.create(question_params)
     session[:question_ids] ||= []
 
-    unless current_user
+    if current_user
+      flash[:notice] = "Question asked."
+    else
       session[:question_ids] << @question.id.to_s
+      flash[:notice] = "Question asked. Sign in?"
     end
 
-    flash[:notice] = "Question asked."
-    redirect_to questions_url
+    redirect_to question_url(@question)
   end
 
   def show; end
@@ -35,7 +37,7 @@ class QuestionsController < Controller
 
   def upvote
     if vote(@question)
-      redirect_to question_url(@question)
+      redirect_back_or question_url(@question)
     else
       redirect_to root_url
     end
@@ -60,6 +62,8 @@ class QuestionsController < Controller
   end
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer)
+          .permit(:body)
+          .merge(user: current_user, question: @question)
   end
 end

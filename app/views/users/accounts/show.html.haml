@@ -1,0 +1,7 @@
+.ba-user.ba-view
+  .ba-questions My Questions
+  - @user.questions.recent(5).each do |question|
+    .ba-question= question.body
+  .ba-answers My Answers
+  - @user.answers.recent(5).each do |answer|
+    .ba-answer= answer.body

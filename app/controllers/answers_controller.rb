@@ -5,7 +5,7 @@ class AnswersController < Controller
 
   def upvote
     if vote(@answer)
-      redirect_to question_url(@answer.question)
+      redirect_back_or question_url(@answer.question)
     else
       redirect_to questions_url
     end

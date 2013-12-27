@@ -4,7 +4,7 @@
     = render 'answers/new'
   .ba-answers
     - if @question.answers.any?
-      - @question.answers.trending.each do |answer|
+      - @question.answers.popular.each do |answer|
         = render 'answers/show', answer: answer
     - else
       %span There are no answers yet.
