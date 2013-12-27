@@ -9,6 +9,7 @@
     .ba-page-header{ role: 'banner' }
       .row-1
         %ul.nav
+          %li= link_to "Browse", questions_path
           - if current_user
             %li= link_to "My Account", users_account_path
             %li= link_to "Sign out", signout_path, id: "sign_out"

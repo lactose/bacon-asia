@@ -1,0 +1,2 @@
+class ApplicationViewModel < SimpleDelegator
+end

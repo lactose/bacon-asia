@@ -7,6 +7,7 @@ class User
   field :email,            type: String
   field :first_name,       type: String
   field :last_name,        type: String
+  field :gender,           type: Boolean
   field :name,             type: String
   field :admin,            type: Boolean, default: false
   field :super_admin,      type: Boolean, default: false

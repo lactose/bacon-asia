@@ -13,6 +13,8 @@ Bundler.require(:default, Rails.env)
 
 module BaconAsia
   class Application < Rails::Application
+    require 'delegate'
+
     %w(validators).each do |dir|
       Dir[config.root.join("lib/#{dir}/*.rb")].each { |f| require f }
     end
