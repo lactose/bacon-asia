@@ -13,12 +13,4 @@ module Voteable
     scope :trending, ->(limit = 50) { where(:vote_count.gte => 5).limit(limit) }
     scope :popular, order_by([:vote_count, :desc])
   end
-
-  def voteable?
-    true
-  end
-
-  def votes
-    self.up_votes - self.down_votes
-  end
 end

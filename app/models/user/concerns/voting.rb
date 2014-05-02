@@ -8,7 +8,7 @@ class User
       end
 
       def toggle_vote!(voteable)
-        return unless voteable.respond_to?(:voteable?)
+        return unless voteable.kind_of?(Voteable)
 
         if vote = fetch_vote(voteable)
           vote.destroy
